@@ -143,11 +143,19 @@ public class ArticleListActivity extends AppCompatActivity implements
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = getLayoutInflater().inflate(R.layout.list_item_article, parent, false);
             final ViewHolder vh = new ViewHolder(view);
+//            view.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    startActivity(new Intent(Intent.ACTION_VIEW,ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
+//                }
+//            });
+
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(Intent.ACTION_VIEW,
-                            ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
+                public void onClick(View v) {
+                    Intent i = new Intent(ArticleListActivity.this, ArticleDetailActivity.class);
+                    i.putExtra("id",ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())).toString());
+                    startActivity(i);
                 }
             });
             return vh;
